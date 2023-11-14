@@ -1,0 +1,103 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_00000230b647d450 .scope module, "tb" "tb" 2 1;
+ .timescale 0 0;
+v00000230b64c35a0_0 .var "A", 0 0;
+v00000230b64c3640_0 .var "B", 0 0;
+v00000230b64c36e0_0 .var "C", 0 0;
+v00000230b64c3780_0 .net "O", 0 0, L_00000230b64b7020;  1 drivers
+v00000230b64c3870_0 .var "clk", 0 0;
+v00000230b64c4090_0 .var "reset", 0 0;
+S_00000230b647d5e0 .scope module, "dut" "sequential_circuit" 2 9, 3 1 0, S_00000230b647d450;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "A";
+    .port_info 1 /INPUT 1 "B";
+    .port_info 2 /INPUT 1 "C";
+    .port_info 3 /OUTPUT 1 "O";
+    .port_info 4 /INPUT 1 "clk";
+    .port_info 5 /INPUT 1 "reset";
+L_00000230b64b6f40 .functor OR 1, v00000230b64c35a0_0, v00000230b64c3640_0, C4<0>, C4<0>;
+L_00000230b64b6df0 .functor AND 1, L_00000230b64b6f40, v00000230b64c36e0_0, C4<1>, C4<1>;
+L_00000230b64b7020 .functor BUFZ 1, v00000230b647d770_0, C4<0>, C4<0>, C4<0>;
+v00000230b6479d70_0 .net "A", 0 0, v00000230b64c35a0_0;  1 drivers
+v00000230b64928d0_0 .net "B", 0 0, v00000230b64c3640_0;  1 drivers
+v00000230b6479aa0_0 .net "C", 0 0, v00000230b64c36e0_0;  1 drivers
+v00000230b647d770_0 .var "Flop", 0 0;
+v00000230b647d810_0 .net "O", 0 0, L_00000230b64b7020;  alias, 1 drivers
+v00000230b64c3320_0 .net "X", 0 0, L_00000230b64b6f40;  1 drivers
+v00000230b64c33c0_0 .net "Y", 0 0, L_00000230b64b6df0;  1 drivers
+v00000230b64c3460_0 .net "clk", 0 0, v00000230b64c3870_0;  1 drivers
+v00000230b64c3500_0 .net "reset", 0 0, v00000230b64c4090_0;  1 drivers
+E_00000230b6477fc0 .event posedge, v00000230b64c3500_0, v00000230b64c3460_0;
+    .scope S_00000230b647d5e0;
+T_0 ;
+    %wait E_00000230b6477fc0;
+    %load/vec4 v00000230b64c3500_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_0.0, 4;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000230b647d770_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v00000230b64c33c0_0;
+    %assign/vec4 v00000230b647d770_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_00000230b647d450;
+T_1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000230b64c3870_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_00000230b647d450;
+T_2 ;
+    %load/vec4 v00000230b64c3870_0;
+    %inv;
+    %assign/vec4 v00000230b64c3870_0, 0;
+    %delay 5, 0;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_00000230b647d450;
+T_3 ;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v00000230b64c4090_0, 0;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000230b64c4090_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000230b64c35a0_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000230b64c3640_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000230b64c36e0_0, 0;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000230b64c35a0_0, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v00000230b64c3640_0, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v00000230b64c36e0_0, 0;
+    %delay 10, 0;
+    %vpi_call 2 39 "$finish" {0 0 0};
+    %end;
+    .thread T_3;
+    .scope S_00000230b647d450;
+T_4 ;
+    %vpi_call 2 45 "$dumpfile", "dump.vcd" {0 0 0};
+    %vpi_call 2 46 "$dumpvars", 32'sb00000000000000000000000000000000 {0 0 0};
+    %end;
+    .thread T_4;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "testbench.v";
+    "design.v";
